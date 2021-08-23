@@ -9,7 +9,7 @@ stages:
       steps:
         - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
         - task: Pulumi@1
-          displayName: PreviewPulumiProject
+          displayName: PulumiPipeline
           inputs:
             command: "up"
             args: "--yes"
