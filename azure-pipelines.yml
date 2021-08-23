@@ -1,0 +1,20 @@
+# Preview Infra
+stages:
+- stage: PulumiCreateResourceGroup
+  jobs:
+    - job: infrastructure
+      continueOnError: false
+      pool:
+        vmImage: "ubuntu-latest"
+      steps:
+        - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
+        - task: Pulumi@1
+          displayName: PreviewPulumiProject
+          inputs:
+            command: "up"
+            args: "--yes"
+            loginArgs: '--local'
+            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            cwd: "./"
+            stack: "test"
+            createStack: true
