@@ -10,9 +10,10 @@ stages:
         - task: Pulumi@1
           displayName: PulumiPipeline
           inputs:
-            azureSubscription: $(AZURE_SUBSCRIPTION)
+            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
             command: 'preview'
             loginArgs: '--local'
             cwd: "./"
             stack: "test"
             createStack: true
+    
