@@ -14,7 +14,7 @@ stages:
           displayName: 'Preview'
           inputs:
             azureSubscription: $(AZURE_SUBSCRIPTION)
-            command: 'Preview'
+            command: 'preview'
             loginArgs: 'azblob://pulumistatefilecontainer'
             cwd: './'
             stack: 'test'
