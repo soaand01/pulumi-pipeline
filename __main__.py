@@ -3,8 +3,10 @@
 import pulumi
 from pulumi_azure_native import resources
 
+
+location = 'WestEurope'
+
 # Create an Azure Resource Group
 resource_group = resources.ResourceGroup('resource_group',
-    resource_group_name='rsg-pulumi-pipeline')
-
-
+    resource_group_name='rsg-pulumi-pipeline',
+    location=location)
