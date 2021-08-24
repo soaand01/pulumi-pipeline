@@ -1,13 +1,14 @@
 # Destroy Resource Group 
 stages:
-- stage: PulumidestroyResourceGroup
+- stage: PulumiPreviewResourceGroup
   jobs:
-    - job: InfraDestroy
+    - job: InfraStack
       pool:
         vmImage: "ubuntu-latest"
       steps:
         - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
         - task: Pulumi@1
+          displayName: 'Previewing'
           inputs:
             azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
             command: 'preview'
@@ -15,4 +16,12 @@ stages:
             cwd: './'
             stack: 'test'
             createStack: true
-            
+        - task: Pulumi@1
+          displayName: 'Deploying'
+          inputs:
+            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            command: 'up'
+            args: '--yes'
+            loginArgs: '--local'
+            cwd: './'
+            stack: 'test'            
