@@ -9,7 +9,7 @@ stages:
         - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
         - bash: export AZURE_STORAGE_ACCOUNT=$(AZURE_STORAGE_ACCOUNT)
         - bash: export AZURE_STORAGE_KEY=$(AZURE_STORAGE_KEY)
-        - bash: echo $(AZURE_SUBSCRIPTION)
+        - bash: echo "$(AZURE_SUBSCRIPTION)"
         - task: Pulumi@1
           displayName: 'Preview'
           inputs:
