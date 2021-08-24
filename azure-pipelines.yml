@@ -13,6 +13,5 @@ stages:
             command: 'preview'
             loginArgs: '--local'
             cwd: './'
-            stack: 'test'
-            createStack: true
+            stack: 'dev'
             
