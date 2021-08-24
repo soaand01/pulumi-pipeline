@@ -18,7 +18,6 @@ stages:
             stack: "test"
             createStack: true
 # Deploy resource Group
-stages:
 - stage: PulumiCreateResourceGroup
   jobs:
     - job: infrastructure
