@@ -5,6 +5,9 @@ stages:
     - job: InfraStack
       pool:
         vmImage: "ubuntu-latest"
+        variables:
+        - name: mysubrcription
+          value: $(AZURE_SUBSCRIPTION) 
       steps:
         - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
         - bash: export AZURE_STORAGE_ACCOUNT=$(AZURE_STORAGE_ACCOUNT)
@@ -12,7 +15,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Preview'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(YOUR-SUBSCRIPTION-HERE)'
+            azureSubscription: ${{ variables.mysubscription }}
             command: 'preview'
             loginArgs: 'azblob://pulumistatefilecontainer'
             cwd: './'
@@ -21,7 +24,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Destroy'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(YOUR-SUBSCRIPTION-HERE)'
+            azureSubscription: ${{ variables.mysubscription }}
             command: 'destroy'
             args: '--yes'
             loginArgs: 'azblob://pulumistatefilecontainer'
@@ -31,7 +34,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Deploy'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(YOUR-SUBSCRIPTION-HERE)'
+            azureSubscription: ${{ variables.mysubscription }}
             command: 'up'
             args: '--yes'
             loginArgs: 'azblob://pulumistatefilecontainer'
