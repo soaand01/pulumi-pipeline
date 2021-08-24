@@ -13,7 +13,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Preview'
           inputs:
-            azureSubscription: '$(AZURE_SUBSCRIPTION)'
+            azureSubscription: $(AZURE_SUBSCRIPTION)
             command: 'Preview'
             loginArgs: 'azblob://pulumistatefilecontainer'
             cwd: './'
@@ -22,7 +22,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Destroy'
           inputs:
-            azureSubscription: '$(AZURE_SUBSCRIPTION)'
+            azureSubscription: $(AZURE_SUBSCRIPTION)
             command: 'destroy'
             args: '--yes'
             loginArgs: 'azblob://pulumistatefilecontainer'
@@ -32,7 +32,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Deploy'
           inputs:
-            azureSubscription: '$(AZURE_SUBSCRIPTION)'
+            azureSubscription: $(AZURE_SUBSCRIPTION)
             command: 'up'
             loginArgs: 'azblob://pulumistatefilecontainer'
             cwd: './'
