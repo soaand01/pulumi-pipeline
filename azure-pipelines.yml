@@ -12,7 +12,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Preview'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            azureSubscription: 'Pay-As-You-Go(YOUR-SUBSCRIPTION-HERE)'
             command: 'preview'
             loginArgs: 'azblob://pulumistatefilecontainer'
             cwd: './'
@@ -21,7 +21,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Destroy'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            azureSubscription: 'Pay-As-You-Go(YOUR-SUBSCRIPTION-HERE)'
             command: 'destroy'
             args: '--yes'
             loginArgs: 'azblob://pulumistatefilecontainer'
@@ -31,7 +31,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Deploy'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            azureSubscription: 'Pay-As-You-Go(YOUR-SUBSCRIPTION-HERE)'
             command: 'up'
             args: '--yes'
             loginArgs: 'azblob://pulumistatefilecontainer'
