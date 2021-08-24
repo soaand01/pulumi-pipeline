@@ -3,7 +3,6 @@ stages:
 - stage: PulumiCreateResourceGroup
   jobs:
     - job: infrastructure
-      continueOnError: false
       pool:
         vmImage: "ubuntu-latest"
       steps:
@@ -12,9 +11,8 @@ stages:
           displayName: PulumiPipeline
           inputs:
             azureSubscription: $(AZURE_SUBSCRIPTION)
-            command: 'up'
+            command: 'preview'
             loginArgs: '--local'
-            args: '--yes'
             cwd: "./"
             stack: "test"
             createStack: true
