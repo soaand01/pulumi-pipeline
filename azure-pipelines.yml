@@ -12,7 +12,6 @@ stages:
           inputs:
             azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
             command: 'destroy'
-            args: '--yes'
             loginArgs: '--local'
             cwd: './'
             stack: 'test'
