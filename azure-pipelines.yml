@@ -11,10 +11,10 @@ stages:
         - task: Pulumi@1
           displayName: PulumiPipeline
           inputs:
+            azureSubscription: $(AZURE_SUBSCRIPTION)
             command: "up"
             args: "--yes"
             loginArgs: '--local'
-            azureSubscription: $(AZURE_SUBSCRIPTION)
             cwd: "./"
             stack: "test"
             createStack: true
