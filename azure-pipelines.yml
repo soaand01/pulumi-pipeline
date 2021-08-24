@@ -8,15 +8,6 @@ stages:
       steps:
         - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
         - task: Pulumi@1
-          displayName: 'Previewing'
-          inputs:
-            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
-            command: 'preview'
-            loginArgs: '--local'
-            cwd: './'
-            stack: 'test'
-            createStack: true
-        - task: Pulumi@1
           displayName: 'Destroy'
           inputs:
             azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
@@ -24,7 +15,10 @@ stages:
             args: '--yes'
             loginArgs: '--local'
             cwd: './'
-            stack: 'test' 
+            stack: 'test'
+        - task: Delay@1
+          inputs:
+            delayForMinutes: '1'
         - task: Pulumi@1
           displayName: 'Deploying'
           inputs:
