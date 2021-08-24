@@ -1,4 +1,23 @@
-# Preview Infra
+# Destroy Resource Group 
+stages:
+- stage: PulumidestroyResourceGroup
+  jobs:
+    - job: infrastructure
+      pool:
+        vmImage: "ubuntu-latest"
+      steps:
+        - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
+        - task: Pulumi@1
+          displayName: PulumiPipeline
+          inputs:
+            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            command: 'destroy'
+            args: '--yes'
+            loginArgs: '--local'
+            cwd: "./"
+            stack: "test"
+            createStack: true
+# Deploy resource Group
 stages:
 - stage: PulumiCreateResourceGroup
   jobs:
