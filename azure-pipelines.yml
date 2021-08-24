@@ -7,12 +7,34 @@ stages:
         vmImage: "ubuntu-latest"
       steps:
         - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
+        - bash: export AZURE_STORAGE_ACCOUNT=$(AZURE_STORAGE_ACCOUNT)
+        - bash: export AZURE_STORAGE_KEY=$(AZURE_STORAGE_KEY)
+        - bash: export AZURE_SUBSCRIPTION=$(AZURE_SUBSCRIPTION)
+        - task: Pulumi@1
+          displayName: 'Preview'
+          inputs:
+            azureSubscription: '$(AZURE_SUBSCRIPTION)'
+            command: 'Preview'
+            loginArgs: 'azblob://pulumistatefilecontainer'
+            cwd: './'
+            stack: 'test'
+            createStack: true
         - task: Pulumi@1
           displayName: 'Destroy'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            azureSubscription: '$(AZURE_SUBSCRIPTION)'
             command: 'destroy'
-            loginArgs: '--local'
+            args: '--yes'
+            loginArgs: 'azblob://pulumistatefilecontainer'
             cwd: './'
             stack: 'test'
-            createStack: true        
+            createStack: true
+        - task: Pulumi@1
+          displayName: 'Deploy'
+          inputs:
+            azureSubscription: '$(AZURE_SUBSCRIPTION)'
+            command: 'up'
+            loginArgs: 'azblob://pulumistatefilecontainer'
+            cwd: './'
+            stack: 'test'
+            createStack: true            
