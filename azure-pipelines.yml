@@ -4,10 +4,7 @@ stages:
   jobs:
     - job: InfraStack
       pool:
-        vmImage: "ubuntu-latest"
-        variables:
-        - name: mysubrcription
-          value: $(AZURE_SUBSCRIPTION) 
+        vmImage: "ubuntu-latest" 
       steps:
         - bash: export PULUMI_CONFIG_PASSPHRASE=$(PULUMI_CONFIG_PASSPHRASE)
         - bash: export AZURE_STORAGE_ACCOUNT=$(AZURE_STORAGE_ACCOUNT)
@@ -16,7 +13,7 @@ stages:
         - task: Pulumi@1
           displayName: 'Preview'
           inputs:
-            azureSubscription: 'Pay-As-You-Go(62c557d1-fbce-4f17-a84a-ae68045b0bd6)'
+            azureSubscription: $(AZURE_SUBSCRIPTION)
             command: 'preview'
             loginArgs: 'azblob://pulumistatefilecontainer'
             cwd: './'
